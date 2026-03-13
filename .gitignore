@@ -1,5 +1,6 @@
-
 target/
 *.log
 *.class
 .DS_Store
+.vscode/
+.idea/
