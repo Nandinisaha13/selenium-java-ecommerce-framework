@@ -1,0 +1,15 @@
+package com.nandini.automation.tests;
+
+import org.testng.annotations.Test;
+
+import com.nandini.automation.base.BaseTest;
+import com.nandini.automation.pages.LoginPage;
+
+public class LoginTests extends BaseTest {
+    @Test
+    public void verifyLogin()
+    {
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.login("standard_user","secret_sauce");
+    }
+}
