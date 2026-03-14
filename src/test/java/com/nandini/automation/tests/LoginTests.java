@@ -3,6 +3,7 @@ package com.nandini.automation.tests;
 import org.testng.annotations.Test;
 
 import com.nandini.automation.base.BaseTest;
+import com.nandini.automation.pages.InventoryPage;
 import com.nandini.automation.pages.LoginPage;
 
 public class LoginTests extends BaseTest {
@@ -11,5 +12,13 @@ public class LoginTests extends BaseTest {
     {
         LoginPage loginPage= new LoginPage(driver);
         loginPage.login("standard_user","secret_sauce");
+    }
+    @Test
+    public void verifyAddToCart()
+    {
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.login("standard_user","secret_sauce");   
+        InventoryPage inventoryPage= new InventoryPage(driver);
+        inventoryPage.addProductToCart();
     }
 }
