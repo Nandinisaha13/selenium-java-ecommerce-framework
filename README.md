@@ -1,110 +1,141 @@
-# Selenium Java E-Commerce Automation Framework
+# Selenium Java E-Commerce Test Automation Framework
 
-This project is a **Selenium WebDriver automation framework built using Java, TestNG, and Maven** to automate end-to-end test scenarios for a sample e-commerce application.
+## Overview
 
-The framework demonstrates **industry-standard automation practices** such as Page Object Model design, modular test structure, and maintainable test architecture.
+This project is a **Selenium WebDriver automation framework built using Java, TestNG, and Maven**.
+It demonstrates industry-standard automation practices including **Page Object Model (POM), Data-Driven Testing using Excel, configuration management, and HTML reporting**.
 
-The application under test is **SauceDemo**, a widely used demo platform for automation practice.
+The framework automates user journeys on the SauceDemo e-commerce testing website.
 
 ---
 
-# Tech Stack
+## Tech Stack
 
 * Java
 * Selenium WebDriver
 * TestNG
 * Maven
-* WebDriverManager
-* Git & GitHub
+* Apache POI (Excel Data Driven Testing)
+* ExtentReports (HTML Test Reporting)
 
 ---
 
-# Project Structure
+## Framework Design
 
-src/test/java/com/nandini/automation
+The project follows the **Page Object Model (POM)** design pattern to keep the test code clean, reusable, and maintainable.
 
-base
-    BaseTest.java
+### Project Structure
 
-pages
-    LoginPage.java
-
-tests
-    LoginTest.java
-
-utils
-
----
-
-# Framework Components
-
-### BaseTest
-
-Responsible for:
-
-* WebDriver initialization
-* Browser setup
-* Opening the application URL
-* Test teardown after execution
-
-### Page Object Classes
-
-Each page of the application is represented by a **Page Object Class** which contains:
-
-* Web element locators
-* Page actions
-
-Example:
-LoginPage.java
-
-### Test Classes
-
-Contain the actual test logic and assertions.
-
-Example:
-LoginTest.java
+```
+src
+ ├── main
+ └── test
+     ├── java/com/nandini/automation
+     │    ├── base
+     │    │     BaseTest.java
+     │    │
+     │    ├── pages
+     │    │     LoginPage.java
+     │    │     InventoryPage.java
+     │    │     CartPage.java
+     │    │
+     │    ├── tests
+     │    │     LoginTests.java
+     │    │
+     │    └── utils
+     │          ConfigReader.java
+     │          ExcelReader.java
+     │          ExtentManager.java
+     │          TestListener.java
+     │
+     └── resources
+          ├── config.properties
+          └── testdata
+               loginData.xlsx
+```
 
 ---
 
-# Design Pattern Used
+## Features Implemented
 
-### Page Object Model (POM)
+### Page Object Model
 
-Page Object Model improves:
+All UI actions are encapsulated inside page classes to separate test logic from UI interaction.
 
-* Code reusability
-* Maintainability
-* Readability of test scripts
+### Data-Driven Testing
 
-Each webpage is represented as a class containing the elements and methods related to that page.
+Test data is read from Excel using Apache POI and executed using TestNG DataProvider.
+
+Example test data:
+
+```
+username        password
+standard_user   secret_sauce
+problem_user    secret_sauce
+```
+
+### Configuration Management
+
+Test configuration such as base URL and credentials are stored in:
+
+```
+config.properties
+```
+
+This allows easy switching between environments.
+
+### HTML Test Reporting
+
+The framework integrates **ExtentReports** to generate detailed HTML reports after execution.
+
+Reports include:
+
+* Test execution status
+* Pass/Fail results
+* Execution logs
+
+Report location:
+
+```
+/reports/test-report.html
+```
 
 ---
 
-# How to Run the Tests
+## Test Scenario Implemented
 
-Clone the repository:
+The automated test flow covers a basic e-commerce user journey:
 
-git clone https://github.com/nandinisaha13/selenium-java-ecommerce-framework.git
-
-Navigate to the project folder and run:
-
-mvn test
-
-This will execute the TestNG test suite and launch the browser.
+1. Login to the application
+2. Navigate to the inventory page
+3. Add product to cart
+4. Open cart
+5. Verify product in cart
 
 ---
 
-# Future Enhancements
+## Running the Tests
 
-* Add Cart and Checkout automation
-* Data-Driven Testing using Excel
-* Test Reporting using Extent Reports
-* CI/CD integration using Jenkins or GitHub Actions
-* Cross-browser execution
+Clone the repository and run:
+
+```
+mvn clean test
+```
+
+The tests will execute using TestNG and generate an HTML report.
 
 ---
 
-# Author
+## Future Improvements
 
-Nandini Saha
-Senior QA Engineer | Automation Enthusiast
+Planned enhancements for the framework:
+
+* Screenshot capture on test failure
+* Parallel test execution
+* CI/CD integration (GitHub Actions / Jenkins)
+* Docker container test execution
+* Cross-browser testing
+* Allure reporting integration
+
+---
+
