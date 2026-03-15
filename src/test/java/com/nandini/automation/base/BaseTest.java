@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import com.nandini.automation.utils.ConfigReader;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
@@ -13,11 +15,12 @@ public class BaseTest {
     @BeforeMethod
     public void setup()
     {
+        ConfigReader config = new ConfigReader();
         WebDriverManager.chromedriver().setup();
         driver= new ChromeDriver();
 
         driver.manage().window().maximize();
-        driver.get("https://www.saucedemo.com/");
+        driver.get(config.getProperty("baseUrl"));
 
     }
 
