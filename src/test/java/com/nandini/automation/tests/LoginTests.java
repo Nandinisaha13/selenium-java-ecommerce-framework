@@ -8,7 +8,6 @@ import com.nandini.automation.base.BaseTest;
 import com.nandini.automation.pages.CartPage;
 import com.nandini.automation.pages.InventoryPage;
 import com.nandini.automation.pages.LoginPage;
-import com.nandini.automation.utils.ConfigReader;
 import com.nandini.automation.utils.ExcelReader;
 
 public class LoginTests extends BaseTest {
