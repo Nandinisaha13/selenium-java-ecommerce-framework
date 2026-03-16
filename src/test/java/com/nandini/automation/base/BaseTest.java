@@ -11,7 +11,7 @@ import com.nandini.automation.utils.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 @Listeners(com.nandini.automation.utils.TestListener.class)
 public class BaseTest {
-    protected WebDriver driver;
+    public static WebDriver driver;
 
     @BeforeMethod
     

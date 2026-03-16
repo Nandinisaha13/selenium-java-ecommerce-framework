@@ -1,11 +1,13 @@
 package com.nandini.automation.utils;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.nandini.automation.base.BaseTest;
 
 public class TestListener implements ITestListener {
     ExtentReports extent = ExtentManager.getInstance();
@@ -21,9 +23,14 @@ public class TestListener implements ITestListener {
 
     public void onTestFailure(ITestResult result) {
         test.fail(result.getThrowable());
+        WebDriver driver= BaseTest.driver;
+        String screenshotPath= ScreenshotUtil.captureScreenshot(driver,result.getMethod().getMethodName());
+        test.addScreenCaptureFromPath(screenshotPath);
     }
 
     public void onFinish(ITestContext context) {
         extent.flush();
     }
+    
+        
 }

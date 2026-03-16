@@ -45,7 +45,7 @@ public void verifyLogin(String username, String password) {
         Assert.assertEquals(product, "Sauce Labs Backpack", "Product name mismatch");
     }
     @DataProvider(name="loginData")
-public Object[][] getLoginData(){
+    public Object[][] getLoginData(){
 
     return ExcelReader.getLoginData();
 
