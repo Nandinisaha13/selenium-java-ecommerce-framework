@@ -19,17 +19,17 @@ public class LoginPage {
     }
     public void enterUsername(String userName)
     {
-        WaitUtils.waitForElementVisible(driver, driver.findElement(username));
+        WaitUtils.waitForElementVisible(driver, username);
         driver.findElement(username).sendKeys(userName);
     }
     public void enterPassword(String password)
     {
-        WaitUtils.waitForElementVisible(driver, driver.findElement(passWord));
+        WaitUtils.waitForElementVisible(driver, passWord);
         driver.findElement(passWord).sendKeys(password);
     }
     public void clicklogin()
     {
-        WaitUtils.waitForElementVisible(driver, driver.findElement(loginbtn));
+        WaitUtils.waitForElementVisible(driver, loginbtn);
         driver.findElement(loginbtn).click();
     }
     

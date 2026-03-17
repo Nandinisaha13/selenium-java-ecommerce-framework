@@ -37,8 +37,11 @@ public void verifyLogin(String username, String password) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
         InventoryPage inventoryPage= new InventoryPage(driver);
-        inventoryPage.addProductToCart();
-        inventoryPage.openCart();
+        inventoryPage.addProductToCart("Sauce Labs Backpack");
+        inventoryPage.addProductToCart("Sauce Labs Onesie");
+        String count = inventoryPage.getCartCount();
+        Assert.assertEquals(count, "2");
+        //inventoryPage.openCart();
 
         CartPage cartPage= new CartPage(driver);
         String product= cartPage.getProductName();
