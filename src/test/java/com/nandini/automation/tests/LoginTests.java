@@ -10,25 +10,17 @@ import com.nandini.automation.pages.CartPage;
 import com.nandini.automation.pages.InventoryPage;
 import com.nandini.automation.pages.LoginPage;
 import com.nandini.automation.utils.ExcelReader;
+import com.nandini.automation.utils.WaitUtils;
 
 public class LoginTests extends BaseTest {
-    @Test(dataProvider="loginData")
+@Test(dataProvider="loginData")
 public void verifyLogin(String username, String password) {
 
     LoginPage loginPage = new LoginPage(driver);
     loginPage.login(username, password);
 
 }
-    // @Test(dataProvider="loginData")
-    // public void verifyLogin()
-    // {
-    //     ConfigReader config = new ConfigReader();
-
-    //     String username = config.getProperty("username");
-    //     String password = config.getProperty("password");
-    //     LoginPage loginPage = new LoginPage(driver);
-    //     loginPage.login(username, password);
-    // }
+    
     
     @Test(dataProvider="loginData")
     public void verifyAddToCart(String username, String password)
@@ -40,8 +32,8 @@ public void verifyLogin(String username, String password) {
         InventoryPage inventoryPage= new InventoryPage(driver);
         inventoryPage.addProductToCart("Sauce Labs Backpack");
         inventoryPage.addProductToCart("Sauce Labs Onesie");
-        String count = inventoryPage.getCartCount();
-        Assert.assertEquals(count, "2");
+        int count = inventoryPage.getCartCount();
+        Assert.assertEquals(count, 2);
         //inventoryPage.openCart();
 
         CartPage cartPage= new CartPage(driver);
@@ -57,6 +49,24 @@ public void verifyLogin(String username, String password) {
         inventoryPage.addProductToCart("Sauce Labs Backpack");
         Assert.assertTrue(driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed());
     }
+    @Test(dataProvider="loginData")
+    public void verifyRemoveProduct(String username, String password)
+    {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(username, password);
+        if(username.equals("problem_user"))
+        {
+            return; // skip because expected behaviour
+        }
+        else{
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.addProductToCart("Sauce Labs Backpack");
+        inventoryPage.removeProduct("Sauce Labs Backpack");
+        int count = inventoryPage.getCartCount();
+        Assert.assertEquals(count, 0, "Cart is not empty after removing product");
+        }
+    }
+        
     @DataProvider(name="loginData")
     public Object[][] getLoginData(){
 

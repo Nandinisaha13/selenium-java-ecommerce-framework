@@ -25,8 +25,22 @@ public class InventoryPage {
 
     }
     // Get cart count
-    public String getCartCount()
+    public int getCartCount()
     {
-        return driver.findElement(cartBadge).getText();
+        if(driver.findElements(cartBadge).size() == 0)
+        {
+            return 0; // No badge = empty cart
+        }
+
+    return Integer.parseInt(driver.findElement(cartBadge).getText());
+    }
+    public void removeProduct(String productName)
+    {
+        String formattedName = productName.toLowerCase().replace(" ", "-");
+        //System.out.println(formattedName);
+        String productId= "remove-" + formattedName;
+       // By removeBtn = By.id("remove-" + formattedName);
+        By removeBtn= By.id(productId);
+        WaitUtils.waitForElementClickable(driver, removeBtn).click();
     }
 }
