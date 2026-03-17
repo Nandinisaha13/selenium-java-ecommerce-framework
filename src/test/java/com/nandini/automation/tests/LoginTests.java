@@ -1,5 +1,6 @@
 package com.nandini.automation.tests;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -46,6 +47,15 @@ public void verifyLogin(String username, String password) {
         CartPage cartPage= new CartPage(driver);
         String product= cartPage.getProductName();
         Assert.assertEquals(product, "Sauce Labs Backpack", "Product name mismatch");
+    }
+    @Test(dataProvider="loginData") // added this because here it expects only 1 add to cart not like amazon where quantity increases
+    public void verifyDuplicateProductNotAdded(String username, String password)
+    {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(username, password);
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.addProductToCart("Sauce Labs Backpack");
+        Assert.assertTrue(driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed());
     }
     @DataProvider(name="loginData")
     public Object[][] getLoginData(){
