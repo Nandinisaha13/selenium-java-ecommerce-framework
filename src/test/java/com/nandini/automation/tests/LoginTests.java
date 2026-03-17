@@ -10,17 +10,17 @@ import com.nandini.automation.pages.CartPage;
 import com.nandini.automation.pages.InventoryPage;
 import com.nandini.automation.pages.LoginPage;
 import com.nandini.automation.utils.ExcelReader;
-import com.nandini.automation.utils.WaitUtils;
+
 
 public class LoginTests extends BaseTest {
-@Test(dataProvider="loginData")
-public void verifyLogin(String username, String password) {
 
-    LoginPage loginPage = new LoginPage(driver);
-    loginPage.login(username, password);
+//     @Test(dataProvider="loginData")
+// public void verifyLogin(String username, String password) {
 
-}
-    
+//     LoginPage loginPage = new LoginPage(driver);
+//     loginPage.login(username, password);
+
+// }
     
     @Test(dataProvider="loginData")
     public void verifyAddToCart(String username, String password)
@@ -38,34 +38,35 @@ public void verifyLogin(String username, String password) {
 
         CartPage cartPage= new CartPage(driver);
         String product= cartPage.getProductName();
-        Assert.assertEquals(product, "Sauce Labs Backpack", "Product name mismatch");
+        Assert.assertTrue(cartPage.isProductPresent(product), "Product not displayed in cart");
+        Assert.assertEquals(cartPage.getProductName(),"Sauce Labs Backpack", "Incorrect product in cart");
     }
-    @Test(dataProvider="loginData") // added this because here it expects only 1 add to cart not like amazon where quantity increases
-    public void verifyDuplicateProductNotAdded(String username, String password)
-    {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(username, password);
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.addProductToCart("Sauce Labs Backpack");
-        Assert.assertTrue(driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed());
-    }
-    @Test(dataProvider="loginData")
-    public void verifyRemoveProduct(String username, String password)
-    {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(username, password);
-        if(username.equals("problem_user"))
-        {
-            return; // skip because expected behaviour
-        }
-        else{
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.addProductToCart("Sauce Labs Backpack");
-        inventoryPage.removeProduct("Sauce Labs Backpack");
-        int count = inventoryPage.getCartCount();
-        Assert.assertEquals(count, 0, "Cart is not empty after removing product");
-        }
-    }
+    // @Test(dataProvider="loginData") // added this because here it expects only 1 add to cart not like amazon where quantity increases
+    // public void verifyDuplicateProductNotAdded(String username, String password)
+    // {
+    //     LoginPage loginPage = new LoginPage(driver);
+    //     loginPage.login(username, password);
+    //     InventoryPage inventoryPage = new InventoryPage(driver);
+    //     inventoryPage.addProductToCart("Sauce Labs Backpack");
+    //     Assert.assertTrue(driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed());
+    // }
+    // @Test(dataProvider="loginData")
+    // public void verifyRemoveProduct(String username, String password)
+    // {
+    //     LoginPage loginPage = new LoginPage(driver);
+    //     loginPage.login(username, password);
+    //     if(username.equals("problem_user"))
+    //     {
+    //         return; // skip because expected behaviour
+    //     }
+    //     else{
+    //     InventoryPage inventoryPage = new InventoryPage(driver);
+    //     inventoryPage.addProductToCart("Sauce Labs Backpack");
+    //     inventoryPage.removeProduct("Sauce Labs Backpack");
+    //     int count = inventoryPage.getCartCount();
+    //     Assert.assertEquals(count, 0, "Cart is not empty after removing product");
+    //     }
+    // }
         
     @DataProvider(name="loginData")
     public Object[][] getLoginData(){

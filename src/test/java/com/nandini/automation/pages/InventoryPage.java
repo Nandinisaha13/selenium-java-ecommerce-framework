@@ -1,7 +1,9 @@
 package com.nandini.automation.pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 
 import com.nandini.automation.utils.WaitUtils;
 
@@ -19,11 +21,13 @@ public class InventoryPage {
         By addToCartBtn= By.id(productId);
         WaitUtils.waitForElementClickable(driver, addToCartBtn).click();
     }
-    public void openCart()
+    
+    public void goToCart()
     {
          driver.findElement(By.className("shopping_cart_link")).click();
 
     }
+    
     // Get cart count
     public int getCartCount()
     {
