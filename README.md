@@ -1,110 +1,158 @@
-# Selenium Java E-Commerce Automation Framework
+# 🧪 Selenium Java E-Commerce Automation Framework
 
-This project is a **Selenium WebDriver automation framework built using Java, TestNG, and Maven** to automate end-to-end test scenarios for a sample e-commerce application.
-
-The framework demonstrates **industry-standard automation practices** such as Page Object Model design, modular test structure, and maintainable test architecture.
-
-The application under test is **SauceDemo**, a widely used demo platform for automation practice.
+A scalable and maintainable Selenium automation framework built using Java, TestNG, and Page Object Model (POM) design. This project demonstrates real-world QA automation practices including data-driven testing, dynamic locators, and reporting.
 
 ---
 
-# Tech Stack
+## 🚀 Tech Stack
 
-* Java
-* Selenium WebDriver
-* TestNG
-* Maven
-* WebDriverManager
-* Git & GitHub
-
----
-
-# Project Structure
-
-src/test/java/com/nandini/automation
-
-base
-    BaseTest.java
-
-pages
-    LoginPage.java
-
-tests
-    LoginTest.java
-
-utils
+* **Language:** Java
+* **Automation Tool:** Selenium WebDriver
+* **Test Framework:** TestNG
+* **Build Tool:** Maven
+* **Reporting:** ExtentReports
+* **Data Handling:** Apache POI (Excel)
+* **Utilities:** Apache Commons IO
 
 ---
 
-# Framework Components
+## 🏗️ Framework Architecture
 
-### BaseTest
-
-Responsible for:
-
-* WebDriver initialization
-* Browser setup
-* Opening the application URL
-* Test teardown after execution
-
-### Page Object Classes
-
-Each page of the application is represented by a **Page Object Class** which contains:
-
-* Web element locators
-* Page actions
-
-Example:
-LoginPage.java
-
-### Test Classes
-
-Contain the actual test logic and assertions.
-
-Example:
-LoginTest.java
+```
+TestNG
+   ↓
+Test Classes
+   ↓
+Page Object Model (POM)
+   ↓
+Utility Classes (Waits, Config, Excel, Screenshot)
+   ↓
+Selenium WebDriver
+   ↓
+Browser
+```
 
 ---
 
-# Design Pattern Used
+## ✨ Features Implemented
 
-### Page Object Model (POM)
+### ✅ Core Framework
 
-Page Object Model improves:
+* Page Object Model (POM) for maintainability
+* TestNG for test execution and assertions
+* Maven for dependency management
 
-* Code reusability
-* Maintainability
-* Readability of test scripts
+### ✅ Data-Driven Testing
 
-Each webpage is represented as a class containing the elements and methods related to that page.
+* Excel-based test data using Apache POI
+* TestNG DataProvider integration
+* Supports multiple user scenarios dynamically
+
+### ✅ Dynamic Locator Strategy
+
+* Product selection using dynamic ID generation
+* Scalable design for handling multiple products
+* Reduced hardcoding of locators
+
+### ✅ Wait Handling
+
+* Explicit waits using WebDriverWait
+* Centralized WaitUtils class
+* Improved test stability and reduced flakiness
+
+### ✅ Reporting & Debugging
+
+* ExtentReports for HTML reporting
+* Screenshot capture on test failure using TestNG Listeners
+* Clear logging of pass/fail status
+
+### ✅ Configuration Management
+
+* External config.properties file
+* Supports environment-based execution
 
 ---
 
-# How to Run the Tests
+## 🧪 Test Scenarios Covered
 
-Clone the repository:
-
-git clone https://github.com/nandinisaha13/selenium-java-ecommerce-framework.git
-
-Navigate to the project folder and run:
-
-mvn test
-
-This will execute the TestNG test suite and launch the browser.
+* Login with multiple users (Data-driven)
+* Add product to cart
+* Validate cart count
+* Multiple test executions using DataProvider
 
 ---
 
-# Future Enhancements
+## 📁 Project Structure
 
-* Add Cart and Checkout automation
-* Data-Driven Testing using Excel
-* Test Reporting using Extent Reports
-* CI/CD integration using Jenkins or GitHub Actions
-* Cross-browser execution
+```
+src
+ ├── main
+ └── test
+     ├── java
+     │   └── com.nandini.automation
+     │       ├── base
+     │       ├── pages
+     │       ├── tests
+     │       └── utils
+     └── resources
+         ├── testdata
+         └── config.properties
+```
 
 ---
 
-# Author
+## ▶️ How to Run
 
-Nandini Saha
-Senior QA Engineer | Automation Enthusiast
+```bash
+mvn clean test
+```
+
+Reports will be generated in:
+
+```
+/reports/test-report.html
+```
+
+---
+
+## 📸 Reporting
+
+* HTML report generated after execution
+* Screenshots captured automatically on test failure
+* Easy debugging with visual evidence
+
+---
+
+## ⚠️ Known Improvements (Planned Enhancements)
+
+* Add remove product from cart functionality
+* Implement checkout flow automation
+* Add parallel test execution (ThreadLocal WebDriver)
+* Add CI/CD integration (GitHub Actions / Jenkins)
+* Add API + UI combined testing
+* Retry mechanism for flaky tests
+
+---
+
+## 💡 Key Learnings
+
+* Handling dynamic web elements using locator strategies
+* Designing scalable automation frameworks
+* Avoiding stale element issues using By locators
+* Improving reliability using explicit waits
+* Building reusable utilities for real-world testing
+
+---
+
+## 👩‍💻 Author
+
+**Nandini Saha**
+Automation Enthusiast
+
+---
+
+## ⭐ Why This Project?
+
+This project reflects real-world automation practices expected in QA roles, focusing on scalability, maintainability, and robustness rather than just basic Selenium scripting.
+
+---
