@@ -125,7 +125,6 @@ Reports will be generated in:
 
 ## ⚠️ Known Improvements (Planned Enhancements)
 
-* Add remove product from cart functionality
 * Implement checkout flow automation
 * Add parallel test execution (ThreadLocal WebDriver)
 * Add CI/CD integration (GitHub Actions / Jenkins)
@@ -144,12 +143,6 @@ Reports will be generated in:
 
 ---
 
-## 👩‍💻 Author
-
-**Nandini Saha**
-Automation Enthusiast
-
----
 
 ## ⭐ Why This Project?
 
