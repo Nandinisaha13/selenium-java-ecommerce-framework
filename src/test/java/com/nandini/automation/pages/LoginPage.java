@@ -2,32 +2,44 @@ package com.nandini.automation.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import com.nandini.automation.utils.WaitUtils;
 
 
 public class LoginPage {
     WebDriver driver;
+    // WebElement username; //because sometimes it may throw error as we would have declared it in constructor, page might have not loaded while the constructor is loaded so better use by
+    // WebElement password;
+    // WebElement loginbtn;
+    By username= By.name("user-name");
+    By passWord= By.id("password");
+    By loginbtn= By.className("submit-button");
     public LoginPage(WebDriver driver)
     {
         this.driver=driver;
     }
     public void enterUsername(String userName)
     {
-        driver.findElement(By.name("user-name")).sendKeys(userName);
-
+        WaitUtils.waitForElementVisible(driver, driver.findElement(username));
+        driver.findElement(username).sendKeys(userName);
     }
-    public void enterPassword(String pass)
+    public void enterPassword(String password)
     {
-        driver.findElement(By.id("password")).sendKeys(pass);
+        WaitUtils.waitForElementVisible(driver, driver.findElement(passWord));
+        driver.findElement(passWord).sendKeys(password);
     }
-    public void clickLogin()
+    public void clicklogin()
     {
-        driver.findElement((By.className("submit-button"))).click();
+        WaitUtils.waitForElementVisible(driver, driver.findElement(loginbtn));
+        driver.findElement(loginbtn).click();
     }
+    
+    
     public void login(String userName, String pass)
     {
         enterUsername(userName);
         enterPassword(pass);
-        clickLogin();
+        clicklogin();
+        
     }
 }
 
