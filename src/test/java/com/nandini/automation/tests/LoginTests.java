@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -33,6 +34,10 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
         InventoryPage inventoryPage= new InventoryPage(driver);
+        if(username.equals("problem_user")) 
+        {
+            throw new SkipException("Known issue with problem_user");
+        }
         inventoryPage.addProductToCart("Sauce Labs Backpack");
         inventoryPage.addProductToCart("Sauce Labs Onesie");
         int count = inventoryPage.getCartCount();
@@ -58,10 +63,10 @@ public class LoginTests extends BaseTest {
     {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
-        if(username.equals("problem_user"))
-        {
-            return; // skip because expected behaviour
+        if(username.equals("problem_user")) {
+            throw new SkipException("Known issue with problem_user");
         }
+    
         else{
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addProductToCart("Sauce Labs Backpack");
@@ -74,9 +79,8 @@ public class LoginTests extends BaseTest {
     @Test(dataProvider = "loginData")
     public void verifyMultipleProductsInCart(String username, String password)
 {
-    if(username.equals("problem_user"))
-    {
-        return; // skip this test
+    if(username.equals("problem_user")) {
+    throw new SkipException("Known issue with problem_user");
     }
 
     LoginPage loginPage = new LoginPage(driver);

@@ -1,9 +1,11 @@
 package com.nandini.automation.pages;
 
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.nandini.automation.utils.WaitUtils;
 
@@ -20,6 +22,9 @@ public void addProductToCart(String productName)
 
     By addBtn = By.id("add-to-cart-" + formattedName);
     By removeBtn = By.id("remove-" + formattedName);
+    //int beforeCount = getCartCount();
+
+    WaitUtils.waitForElementClickable(driver, addBtn).click();
 
     // If already added → skip
     if (driver.findElements(removeBtn).size() > 0)
@@ -38,6 +43,18 @@ public void addProductToCart(String productName)
         System.out.println("Add button not found for: " + productName);
     }
 }
+    public void waitForCartCountToBe(int expectedCount)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(driver -> {
+        try {
+            return getCartCount() == expectedCount;
+        } catch (Exception e) {
+            return false;
+        }
+    });
+    }
     
     public void goToCart()
     {
@@ -63,8 +80,8 @@ public void addProductToCart(String productName)
     {
     String formattedName = productName.toLowerCase().replace(" ", "-");
     By removeBtn = By.id("remove-" + formattedName);
-    By addBtn = By.id("add-to-cart-" + formattedName);
+    //By addBtn = By.id("add-to-cart-" + formattedName);
     WaitUtils.waitForElementClickable(driver, removeBtn).click();
-    //WaitUtils.waitForElementVisible(driver, addBtn);
+    
     }
 }
