@@ -1,6 +1,7 @@
 package com.nandini.automation.pages;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,10 +19,16 @@ public class CartPage {
     {
         return driver.findElement(By.className("inventory_item_name")).getText();
     }
-    // public boolean isProductDisplayed()
-    // {
-    //     return driver.findElements(productName).size()>0;
-    // }
+    public List<String> getAllProductNames()
+    {
+        List<WebElement> products = driver.findElements(By.className("inventory_item_name"));
+        List<String> productNames = new ArrayList<>();
+        for(WebElement product: products)
+        {
+            productNames.add(product.getText().trim());
+        }
+        return productNames;
+    }
     public boolean isProductPresent(String expectedProduct)
     {
         List<WebElement> products = driver.findElements(By.className("inventory_item_name"));

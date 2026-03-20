@@ -22,11 +22,19 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestFailure(ITestResult result) {
+
+    if (test != null) {
         test.fail(result.getThrowable());
-        WebDriver driver= BaseTest.driver;
-        String screenshotPath= ScreenshotUtil.captureScreenshot(driver,result.getMethod().getMethodName());
+
+        WebDriver driver = BaseTest.driver;
+        String screenshotPath = ScreenshotUtil.captureScreenshot(
+            driver, 
+            result.getMethod().getMethodName()
+        );
+
         test.addScreenCaptureFromPath(screenshotPath);
     }
+}
 
     public void onFinish(ITestContext context) {
         extent.flush();

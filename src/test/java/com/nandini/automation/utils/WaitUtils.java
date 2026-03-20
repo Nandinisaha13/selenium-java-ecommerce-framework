@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WaitUtils {
     public static WebElement waitForElementVisible(WebDriver driver, By locator)
     {
-        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
     public static WebElement waitForElementClickable(WebDriver driver, By locator)
     {
-        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 }

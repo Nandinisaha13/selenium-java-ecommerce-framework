@@ -9,10 +9,11 @@ public class ExtentManager {
     {
         if(extent== null)
         {
+            extent = new ExtentReports();
             ExtentSparkReporter reporter =
                     new ExtentSparkReporter("reports/test-report.html");
 
-            extent = new ExtentReports();
+            
             extent.attachReporter(reporter);
         }
         return extent;

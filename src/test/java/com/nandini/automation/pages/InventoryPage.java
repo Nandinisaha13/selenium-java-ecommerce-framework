@@ -14,13 +14,30 @@ public class InventoryPage {
     {
         this.driver=driver;
     }
-    public void addProductToCart(String productName)
+public void addProductToCart(String productName)
+{
+    String formattedName = productName.toLowerCase().replace(" ", "-");
+
+    By addBtn = By.id("add-to-cart-" + formattedName);
+    By removeBtn = By.id("remove-" + formattedName);
+
+    // If already added → skip
+    if (driver.findElements(removeBtn).size() > 0)
     {
-        String formatted_name= productName.toLowerCase().replace(" ", "-");
-        String productId= "add-to-cart-" + formatted_name;
-        By addToCartBtn= By.id(productId);
-        WaitUtils.waitForElementClickable(driver, addToCartBtn).click();
+        System.out.println(productName + " already added");
+        return;
     }
+
+    // If add button exists → click
+    if (driver.findElements(addBtn).size() > 0)
+    {
+        WaitUtils.waitForElementClickable(driver, addBtn).click();
+    }
+    else
+    {
+        System.out.println("Add button not found for: " + productName);
+    }
+}
     
     public void goToCart()
     {
