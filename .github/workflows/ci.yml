@@ -27,12 +27,14 @@ jobs:
           key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             maven-${{ runner.os }}
+      - name: Install Chrome
+        run: |
+              sudo apt-get update 
+              sudo apt-get install -y google-chrome-stable
 
       - name: Install dependencies
         run: mvn clean install -DskipTests
 
-      - name: Run Tests
-        run: mvn test
       - name: Run Tests
         run: mvn test -Dheadless=true
 
@@ -44,5 +46,4 @@ jobs:
           path: |
             target/surefire-reports/
             target/*.html
-      - name: Install Chrome
-        run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+     
