@@ -19,4 +19,15 @@ public class WaitUtils {
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+    public static void waitForTextToBePresent(WebDriver driver, By locator, String text) 
+    {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+    }
+
+    public static boolean waitForElementInvisible(WebDriver driver, By locator) 
+    {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
 }

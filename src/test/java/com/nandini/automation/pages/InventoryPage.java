@@ -24,7 +24,6 @@ public void addProductToCart(String productName)
     // If already added → skip
     if (driver.findElements(removeBtn).size() > 0)
     {
-        System.out.println(productName + " already added");
         return;
     }
 
@@ -32,6 +31,7 @@ public void addProductToCart(String productName)
     if (driver.findElements(addBtn).size() > 0)
     {
         WaitUtils.waitForElementClickable(driver, addBtn).click();
+        WaitUtils.waitForElementVisible(driver, removeBtn);
     }
     else
     {
@@ -41,27 +41,30 @@ public void addProductToCart(String productName)
     
     public void goToCart()
     {
-         driver.findElement(By.className("shopping_cart_link")).click();
+        By cartLink = By.className("shopping_cart_link");
+        WaitUtils.waitForElementClickable(driver, cartLink).click();
+        driver.findElement(cartLink).click();
+        WaitUtils.waitForElementVisible(driver, By.className("cart_item"));
 
     }
     
     // Get cart count
     public int getCartCount()
     {
-        if(driver.findElements(cartBadge).size() == 0)
-        {
-            return 0; // No badge = empty cart
-        }
-
-    return Integer.parseInt(driver.findElement(cartBadge).getText());
+        try {
+        return Integer.parseInt(
+            WaitUtils.waitForElementVisible(driver, cartBadge).getText()
+        );
+    } catch (Exception e) {
+        return 0;
+    }
     }
     public void removeProduct(String productName)
     {
-        String formattedName = productName.toLowerCase().replace(" ", "-");
-        //System.out.println(formattedName);
-        String productId= "remove-" + formattedName;
-       // By removeBtn = By.id("remove-" + formattedName);
-        By removeBtn= By.id(productId);
-        WaitUtils.waitForElementClickable(driver, removeBtn).click();
+    String formattedName = productName.toLowerCase().replace(" ", "-");
+    By removeBtn = By.id("remove-" + formattedName);
+    By addBtn = By.id("add-to-cart-" + formattedName);
+    WaitUtils.waitForElementClickable(driver, removeBtn).click();
+    WaitUtils.waitForElementVisible(driver, addBtn);
     }
 }
