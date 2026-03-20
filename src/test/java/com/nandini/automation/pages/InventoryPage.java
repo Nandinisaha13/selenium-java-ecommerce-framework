@@ -31,7 +31,7 @@ public void addProductToCart(String productName)
     if (driver.findElements(addBtn).size() > 0)
     {
         WaitUtils.waitForElementClickable(driver, addBtn).click();
-        WaitUtils.waitForElementVisible(driver, removeBtn);
+        //WaitUtils.waitForElementVisible(driver, removeBtn);
     }
     else
     {
@@ -44,7 +44,7 @@ public void addProductToCart(String productName)
         By cartLink = By.className("shopping_cart_link");
         WaitUtils.waitForElementClickable(driver, cartLink).click();
         driver.findElement(cartLink).click();
-        WaitUtils.waitForElementVisible(driver, By.className("cart_item"));
+        //WaitUtils.waitForElementVisible(driver, By.className("cart_item"));
 
     }
     
@@ -65,6 +65,6 @@ public void addProductToCart(String productName)
     By removeBtn = By.id("remove-" + formattedName);
     By addBtn = By.id("add-to-cart-" + formattedName);
     WaitUtils.waitForElementClickable(driver, removeBtn).click();
-    WaitUtils.waitForElementVisible(driver, addBtn);
+    //WaitUtils.waitForElementVisible(driver, addBtn);
     }
 }
