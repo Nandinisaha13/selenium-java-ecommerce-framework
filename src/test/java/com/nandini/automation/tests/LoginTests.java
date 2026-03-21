@@ -67,12 +67,14 @@ public class LoginTests extends BaseTest {
             throw new SkipException("Known issue with problem_user");
         }
     
-        else{
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.addProductToCart("Sauce Labs Backpack");
-        inventoryPage.removeProduct("Sauce Labs Backpack");
-        int count = inventoryPage.getCartCount();
-        Assert.assertEquals(count, 0, "Cart is not empty after removing product");
+        else
+        {
+            InventoryPage inventoryPage = new InventoryPage(driver);
+            inventoryPage.addProductToCart("Sauce Labs Backpack");
+            inventoryPage.removeProduct("Sauce Labs Backpack");
+            int count = inventoryPage.getCartCount();
+            System.err.println(count);
+            Assert.assertEquals(count, 0, "Cart is not empty after removing product");
         }
     }
 
