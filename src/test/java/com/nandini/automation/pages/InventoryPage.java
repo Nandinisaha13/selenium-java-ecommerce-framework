@@ -43,7 +43,8 @@ public void addProductToCart(String productName)
         return;
     }
     int beforeCount = getCartCount();
-    WaitUtils.waitForElementClickable(driver, addBtn).click();
+    WaitUtils.click(driver, addBtn);
+    //WaitUtils.waitForElementClickable(driver, addBtn).click();
     waitForCartCountToBe(beforeCount + 1);
 }
     

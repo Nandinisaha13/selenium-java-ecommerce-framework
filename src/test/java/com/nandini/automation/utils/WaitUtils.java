@@ -7,8 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
-public class WaitUtils {
+public class WaitUtils 
+{
     public static WebElement waitForElementVisible(WebDriver driver, By locator)
     {
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -30,4 +32,18 @@ public class WaitUtils {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
-}
+
+
+public static void click(WebDriver driver, By locator) {
+    WebElement element = waitForElementClickable(driver, locator);
+
+    try 
+    {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);element.click();
+    }   
+    catch (Exception e) 
+    {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+}}
